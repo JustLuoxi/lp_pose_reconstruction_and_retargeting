@@ -1,12 +1,13 @@
+# Author: Xi Luo
+# Email: sunshine.just@outlook.com
+# SMPLXObjects class. In this step, smplh and smplx meshes are equivalent as we aim to transfer human motion to .fbx formate animation
+# Heavily inspired by and borrowed from  https://github.com/softcat477/SMPL-to-FBX
+
+
 import numpy as np
-import glob
-import pickle
-import os
 
 from typing import Dict
 from typing import Tuple
-
-from PathFilter import PathFilter
 
 class SMPLXObjects(object):
     joints = [
@@ -76,10 +77,6 @@ class SMPLXObjects(object):
     def __init__(self, read_path):
         self.files = {}
 
-        # For AIST naming convention
-        # #paths = PathFilter.filter(read_path, dance_genres=["gBR"],  dance_types=["sBM"], music_IDs=["0"])
-        # paths = PathFilter.filter(read_path, dance_genres=None,  dance_types=None, music_IDs=None)
-        # for path in paths:
         path = read_path.replace("\\","/")
         filename = path.split("/")[-1]
         

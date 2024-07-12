@@ -1,3 +1,7 @@
+# Author: Xi Luo
+# Email: sunshine.just@outlook.com
+# H2tc data processing utils
+
 import pandas as pd
 import numpy as np
 import json
@@ -316,90 +320,5 @@ def load_align_anno(take_folder):
     return aligned, anno
 
 
-# def loadhands(data_folder, take_id):
-#     processed_folder = os.path.join(data_folder,take_id,"processed")
-    
-#     aligned, anno = load_align_anno(os.path.join(data_folder,take_id))
-#     action = anno["throw"]
-    
-#     # get the start and end frame
-#     s_frame = 0
-#     e_frame = 0
-#     e_frame = anno["throw"].time_point["sub1_head_motion"]["frame"]
-#     for i in range(e_frame - s_frame + 1):
-#         ts = aligned[str(i)]["right_hand_pose"]
-#         ts_L = aligned[str(i)]["left_hand_pose"]
-#         if ts != None and ts_L!=None:
-#             s_frame = i
-#             break
-    
-#     # load hands poses
-#     file = os.path.join(processed_folder, "right_hand_pose.csv")
-#     file_L = os.path.join(processed_folder, "left_hand_pose.csv")
-    
-#     # dim: [seq_len, 60]
-#     wholebody_pose_seq = load_handpose_timestamp(file, "right_hand_pose", aligned, s_frame, e_frame)
-#     l_hand_pose_seq = load_handpose_timestamp(file_L, "left_hand_pose", aligned, s_frame, e_frame)
-    
-#     hands = np.concatenate((wholebody_pose_seq, l_hand_pose_seq), axis=1)
-#     return hands, action.hand, anno, s_frame, e_frame
 
-def loadbodypose(take_folder):
-    bodypose_file = os.path.join(take_folder,"processed/rgbd0/rgbd0_cliff_hr48.npz")
-    smpl_para = np.load(bodypose_file)
-    smpl_poses = smpl_para['pose'] # seq_len*72
-    n = smpl_poses.shape[0] 
-    betas = smpl_para['shape'].reshape(n,-1) # seq_len*10
-    smpl_transl = smpl_para['global_t'].reshape(n,-1) # seq_len*3
-    img_path_list = smpl_para['imgname']
-    return smpl_poses, betas, smpl_transl, img_path_list
-
-import glob
-def loadbodypose_humor(take_folder):
-    results_out = os.path.join(take_folder,"processed/rgbd0/humor_out_v3/results_out") 
-    # folders = os.listdir(results_out)
-    # folders.sort()
-    # files = glob.glob(results_out+"/"+ folders[0] + '/stage2_results.*')
-    body_file = results_out+'/stage2_results.npz'
-    smpl_para = np.load(body_file)
-    smpl_poses = smpl_para['pose_body'] # seq_len*72
-    n = smpl_poses.shape[0] 
-    betas = smpl_para['betas'] # 16
-    smpl_transl = smpl_para['trans'].reshape(n,-1) # seq_len*3
-    root_orient = smpl_para['root_orient']
-    return smpl_poses, betas, smpl_transl, root_orient
-
-
-FINAL_DATA_FOLDER = "/home/ur-5/Projects/DATA"
-def _loadwholebody_humor(data_folder, take_id):
-    result_folder = osp.join(FINAL_DATA_FOLDER, take_id)
-    body_file = os.path.join(result_folder,"processed/rgbd0/humor_out_v3/results_out/stage2_results.npz") 
-    smpl_para = np.load(body_file)
-    smpl_poses = smpl_para['pose_body'] # seq_len*63
-    smpl_hands = smpl_para['pose_hand'] # seq_len*(lefthand 45 + righthand 45)
-    smpl_poses = np.concatenate((smpl_poses, smpl_hands), axis=1) # seq_len*(63+90)
-    n = smpl_poses.shape[0] 
-    betas = smpl_para['betas'] # 16
-    smpl_transl = smpl_para['trans'].reshape(n,-1) # seq_len*3
-    root_orient = smpl_para['root_orient']
-    return smpl_poses, betas, smpl_transl, root_orient
     
-    
-def loadwholebodypose(data_folder, take_id, stage="throw"):
-    # is the pose reliable? judging by optimization loss
-    loss_file = osp.join( FINAL_DATA_FOLDER, take_id ,"processed/rgbd0/humor_out_v3/results_out/final_loss.txt")
-    loss = np.loadtxt(loss_file)
-    if loss > 300:
-        return None
-    if np.isnan(loss) :
-        return None
-    
-    # load hands pose
-    s_frame, e_frame, anno, _ = loadseqseg(data_folder, take_id, stage) 
-    # load body pose
-    smpl_pose_seq, betas, smpl_transl, root_orient = _loadwholebody_humor(data_folder, take_id)
-    
-    # wholebody_pose_seq = np.concatenate((smpl_transl,root_orient,smpl_pose_seq),axis=1)
-    
-    # return wholebody_pose_seq, anno[stage].hand, s_frame, e_frame 
-    return smpl_transl,root_orient,smpl_pose_seq, anno[stage].hand, s_frame, e_frame, betas 

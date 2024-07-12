@@ -21,9 +21,14 @@ def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
         cv2.destroyAllWindows()
 
 def cam_extri_estimation(save_folder):
-    cam_K = np.array([[693.91839599609375, 0.0, 665.73150634765625, 0.0],
-                            [0.0, 693.91839599609375, 376.775787353515625, 0.0],
-                            [0.0, 0.0, 1.0, 0.0]])
+    # cam_K = np.array([[693.91839599609375, 0.0, 665.73150634765625, 0.0],
+    #                         [0.0, 693.91839599609375, 376.775787353515625, 0.0],
+    #                         [0.0, 0.0, 1.0, 0.0]])
+    # the camera intrinsics of the 'rgbd0' images
+    # access it from http://calib.stereolabs.com/?SN=17471  [LEFT_CAM_HD]
+    cam_K = np.array([[699.78, 0.0, 660.19],
+                                [0.0, 699.78, 365.3615],
+                                [0.0, 0.0, 1.0]])
     model_points = np.array([[0.0,  0.0,  0.0],
                              [2.0,  0.0,  0.0],
                              [2.0,  0.0,  5.0],

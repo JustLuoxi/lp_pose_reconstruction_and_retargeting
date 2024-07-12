@@ -1,10 +1,11 @@
 # Camera calibration
 - Camera intrinsic matrix is:
 ```
-[[693.91839599609375, 0.0, 665.73150634765625],
-[0.0, 693.91839599609375, 376.775787353515625],
+[[699.78, 0.0, 660.19],
+[0.0, 699.78, 365.3615],
 [0.0, 0.0, 1.0]]
-```  
+```
+It can be accessed from [ZED calibration file](http://calib.stereolabs.com/?SN=17471) (SN:17471, the left view camera, images are in `rgbd0` folder). We use the `LEFT_CAM_HD` as intrinsics in all our cases. 
 - Camera extrinsic matrix could be calculated by 
 ```python
 python cam_calib/annotator_camextr.py --img_file ${YOUR_IMAGE_PATH} --save_folder ${YOUR_SAVE_PATH}

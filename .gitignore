@@ -13,7 +13,6 @@ smplh_to_fbx/FBX_model
 *.avi
 
 # other files
-*.txt
 *.ply
 *.obj
 *.pkl

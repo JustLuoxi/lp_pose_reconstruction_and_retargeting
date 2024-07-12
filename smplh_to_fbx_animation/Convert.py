@@ -1,16 +1,15 @@
+# Author: Xi Luo
+# Email: sunshine.just@outlook.com
+# SMPLH motion to FBX animation
+# Heavily inspired by and borrowed from  https://github.com/softcat477/SMPL-to-FBX
+
 from FbxReadWriter import FbxReadWrite
-from SmplObject import SmplObjects
 from SMPLXObject import SMPLXObjects
 import argparse
 import tqdm
 
-import sys, os, glob
+import os
 cur_file_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(cur_file_path, '..'))
-sys.path.append(os.path.join(cur_file_path, '.'))
-
-if os.path.exists(cur_file_path + "./FBX_model/smplx-male.fbx"):
-    test = 0
 
 def getArg():
     parser = argparse.ArgumentParser()
@@ -26,10 +25,13 @@ if __name__ == "__main__":
     fbx_source_path = args.fbx_source_path
     output_base = args.output_base
 
+    # get the smplx objects and its parameters
     smplObjects = SMPLXObjects(input_motion_base)
+    
     for pkl_name, smpl_params in tqdm.tqdm(smplObjects):
         try:
-            fbxReadWrite = FbxReadWrite(cur_file_path + fbx_source_path)
+            fbx_path = cur_file_path + fbx_source_path
+            fbxReadWrite = FbxReadWrite(fbx_path)
             fbxReadWrite.addAnimation(pkl_name, smpl_params)
             fbxReadWrite.writeFbx(output_base, pkl_name)
         except Exception as e:

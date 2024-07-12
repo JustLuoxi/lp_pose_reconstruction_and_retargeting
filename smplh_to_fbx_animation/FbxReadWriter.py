@@ -1,7 +1,9 @@
+# Author: Xi Luo
+# Email: sunshine.just@outlook.com
+# SMPLH motion to FBX animation based on Autodesk PythonFBX SDK https://download.autodesk.com/us/fbx/20112/fbx_sdk_help/index.html?url=WS1a9193826455f5ff453265c9125faa23bbb5fe8.htm,topicNumber=d0e8312
+# Heavily inspired by and borrowed from  https://github.com/softcat477/SMPL-to-FBX
 
-import sys
 from typing import Dict
-from SmplObject import SmplObjects
 from SMPLXObject import SMPLXObjects
 import os
 from scipy.spatial.transform import Rotation as R

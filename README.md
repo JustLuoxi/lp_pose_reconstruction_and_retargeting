@@ -1,4 +1,5 @@
 <!-- Author: Xi Luo -->
+<!-- Email: sunshine.just@outlook.com -->
 <!-- Documentation for Human Pose Extraction, Optimization and Retargeting -->
 # Human Pose Extraction, Optimization and Retargeting
 
@@ -125,7 +126,7 @@ python pose_reconstruction_frommm/run_fitting_mm.py \
 `--smplh` specifies the smplh human model path. We use the male model by default. You can change the path to specify the female ('female/model.npz') or neutral ('neutral/model.npz') human model. 
 `--data-path` specifies the processed h^2^tc image folder, e.g., `root/002870/processed/rgbd0`.
 `--mmhuman` specifies the coarse body pose file extracted from [coarse human pose estimation](#coarse-human-pose-estimation), e.g., `root/vis_results/inference_result.npz`.
-`--out` specifies the folder path to save the optimized human pose results. The output visualized meshes are saved in `${OUTPATH}/body_meshes_humor`. The results are saved in `${OUTPATH}/results_out/stage2_results.npz`. 
+`--out` specifies the folder path to save the optimized human pose results. The output visualized meshes are saved in `${OUTPATH}/body_meshes_h2tc`. The results are saved in `${OUTPATH}/results_out/stage2_results.npz`. 
 
  
 

@@ -1,10 +1,6 @@
-import copy
-
 import torch
 import numpy as np
 from torch.nn import functional as F
-
-from human_tools.body_model import SMPL_JOINTS
 
 #
 # For computing local body frame
@@ -29,33 +25,6 @@ def compute_aligned_from_right(body_right):
     world2aligned_mat = batch_rodrigues(world2aligned_aa)
 
     return world2aligned_mat, world2aligned_aa
-
-def compute_world2aligned_mat(rot_pos):
-    '''
-    batch of world rotation matrices: B x 3 x 3
-    returns rot mats that align the inputs to the forward direction: B x 3 x 3
-    Torch version
-    '''
-    body_right = -rot_pos[:,:,0] #.clone() # in body coordinates body x-axis is left
-
-    world2aligned_mat, world2aligned_aa = compute_aligned_from_right(body_right)
-    return world2aligned_mat
-    
-
-def compute_world2aligned_joints_mat(joints):
-    '''
-    Compute world to canonical frame (rotation around up axis)
-    from the given batch of joints (B x J x 3)
-    '''
-    left_idx = SMPL_JOINTS['leftUpLeg']
-    right_idx = SMPL_JOINTS['rightUpLeg']
-
-    body_right = joints[:, right_idx] - joints[:, left_idx]
-    body_right = body_right / torch.norm(body_right, dim=1, keepdim=True)
-
-    world2aligned_mat, world2aligned_aa = compute_aligned_from_right(body_right)
-
-    return world2aligned_mat
 
 def convert_to_rotmat(pred_rot, rep='aa'):
     '''
