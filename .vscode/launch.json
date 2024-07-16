@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python 调试程序: 当前文件",
+      "name": "Python debug: current file",
       "type": "debugpy",
       "request": "launch",
       "program": "${file}",
@@ -16,9 +16,9 @@
       "console": "integratedTerminal",
       "args": [
         "--img_file",
-        "D:/h2tc_dataset/throw/002870/processed/rgbd0/left_0000.jpg",
+        "/root/h2tc_dataset/throw/002870/processed/rgbd0/left_0000.jpg",
         "--save_folder",
-        "D:/h2tc_dataset/throw/002870"
+        "/root/h2tc_dataset/throw/002870"
       ]
     },
     {
@@ -34,7 +34,7 @@
         "--tracking_config",
         "demo/mmtracking_cfg/deepsort_faster-rcnn_fpn_4e_mot17-private-half.py",
         "--input_path",
-        "D:/h2tc_dataset/002870/processed/rgbd0",
+        "/root/h2tc_dataset/002870/processed/rgbd0",
         "--show_path",
         "vis_results/002870.mp4",
         "--smooth_type",
@@ -56,11 +56,11 @@
       "args": [
         "@./pose_reconstruction_frommm/fit_h2tc_mm.cfg",
         "--data-path",
-        "D:/h2tc_dataset/throw/002870/processed/rgbd0",
+        "/root/h2tc_dataset/throw/002870/processed/rgbd0",
         "--mmhuman",
-        "D:/h2tc_dataset/throw/002870/processed/rgbd0/inference_result.npz",
+        "/root/h2tc_dataset/throw/002870/processed/rgbd0/inference_result.npz",
         "--out",
-        "D:/h2tc_dataset/throw/002870/processed/rgbd0/opt_pose",
+        "/root/h2tc_dataset/throw/002870/processed/rgbd0/opt_pose",
         "--smplh",
         "./pose_reconstruction_frommm/body_models/male/model.npz"
       ]
@@ -74,11 +74,11 @@
       "justMyCode": true,
       "args": [
         "--input_motion_base",
-        "D:/h2tc_dataset/throw/002870/processed/rgbd0/opt_pose/results_out/stage2_results.npz",
+        "/root/h2tc_dataset/throw/002870/processed/rgbd0/opt_pose/results_out/stage2_results.npz",
         "--fbx_source_path",
         "./FBX_model/smplx-male.fbx",
         "--output_base",
-        "D:/h2tc_dataset/throw/002870/processed/rgbd0"
+        "/root/h2tc_dataset/throw/002870/processed/rgbd0"
       ]
     },
   ]

@@ -69,7 +69,8 @@ given that the multi-modal data streams collected in our dataset, including the 
     └── CamExtr.txt
    ```
 
-2. Prepare the environment
+2. Prepare the environment (choose one of the following methods)
+   Option 1: (anaconda) 
    ```shell
    conda create -n h2tc_pose python=3.8
    conda activate h2tc_pose
@@ -78,6 +79,14 @@ given that the multi-modal data streams collected in our dataset, including the 
    Pillow  pyrender pyglet==1.5.15  tensorboard  addict \
    git+https://github.com/nghorbani/configer \
    torchgeometry==0.1.2 smplx==0.1.28
+   conda activate h2tc_pose
+   ```
+   Option 2: (docker image)
+   ```shell
+   docker pull justluoxi/h2tc_env_image:latest
+   docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
+   docker exec -it h2tc bash
+   conda activate h2tc_pose
    ```
 3. Prepare SMPL+H model
 (<small>Note: In the last [coarse human pose estimation](#coarse-human-pose-estimation) stage, the mmhuman3d estimates human body poses only. In this stage, we want to recover the body+hands poses, so we use the smplh model.</small>)
@@ -174,14 +183,28 @@ To animate the human model and retarget the motion to robots, we first transfer 
 ### Transform the *smplh* human motions to the general format animations (.fbx)
 
 
-1. Prepare the environment  
-   a. Install [Python FBX](https://download.autodesk.com/us/fbx/20112/fbx_sdk_help/index.html?url=WS1a9193826455f5ff453265c9125faa23bbb5fe8.htm,topicNumber=d0e8312).  
-    b. Run the following commands.
-    
-     ```shell
-     cd smplh_to_fbx_animation
-     pip install -r requirements.txt
-     ```
+1. Prepare the environment  (choose one of the following methods)
+   Option 1:
+      <small>a. Install [Python FBX](https://download.autodesk.com/us/fbx/20112/fbx_sdk_help/index.html?url=WS1a9193826455f5ff453265c9125faa23bbb5fe8.htm,topicNumber=d0e8312).  
+      b. Run the following commands:</small>
+      
+      ```shell
+      cd smplh_to_fbx_animation
+      pip install -r requirements.txt
+      ```
+   Option 2: (docker image)
+      ```shell
+      docker pull justluoxi/h2tc_env_image:latest
+      docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
+      ```
+      <small>This environment shares the same docker image with the last [h2tc_pose environment](#multi-modal-based-human-pose-optimization). 
+      If you have built the docker container before, you can ignore the pull-image step and run directly:   </small>
+      ```shell
+      docker exec -it h2tc bash
+      conda activate h2tc_tofbx
+      ```
+
+
 2. Prepare SMPLH fbx model 
    Follow the [SMPL-X Blender Add-On Tutorial](https://www.youtube.com/watch?v=DY2k29Jef94) to export the Tpose smplh skinned mesh as a rigged model (For convenience, you can export and use the smplx skinned mesh. In this step, smplh and smplx meshes are equivalent as we aim to transfer human motion to .fbx formate animation). Save the female skinned mesh `smplx-female.fbx` and male skinned mesh `smplx-male.fbx` to the folder `./FBX_model`.
 3. File structure:
