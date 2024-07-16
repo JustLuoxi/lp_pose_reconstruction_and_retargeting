@@ -70,7 +70,7 @@ given that the multi-modal data streams collected in our dataset, including the 
    ```
 
 2. Prepare the environment (choose one of the following methods)
-   Option 1: (anaconda) 
+   - Option 1: (anaconda) 
    ```shell
    conda create -n h2tc_pose python=3.8
    conda activate h2tc_pose
@@ -81,7 +81,7 @@ given that the multi-modal data streams collected in our dataset, including the 
    torchgeometry==0.1.2 smplx==0.1.28
    conda activate h2tc_pose
    ```
-   Option 2: (docker image)
+   - Option 2: (docker image)
    ```shell
    docker pull justluoxi/h2tc_env_image:latest
    docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
@@ -184,7 +184,7 @@ To animate the human model and retarget the motion to robots, we first transfer 
 
 
 1. Prepare the environment  (choose one of the following methods)
-   Option 1:
+   - Option 1:
       <small>a. Install [Python FBX](https://download.autodesk.com/us/fbx/20112/fbx_sdk_help/index.html?url=WS1a9193826455f5ff453265c9125faa23bbb5fe8.htm,topicNumber=d0e8312).  
       b. Run the following commands:</small>
       
@@ -192,7 +192,7 @@ To animate the human model and retarget the motion to robots, we first transfer 
       cd smplh_to_fbx_animation
       pip install -r requirements.txt
       ```
-   Option 2: (docker image)
+   - Option 2: (docker image)
       ```shell
       docker pull justluoxi/h2tc_env_image:latest
       docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
