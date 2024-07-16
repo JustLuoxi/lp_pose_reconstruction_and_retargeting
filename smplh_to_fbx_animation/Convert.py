@@ -30,7 +30,7 @@ if __name__ == "__main__":
     
     for pkl_name, smpl_params in tqdm.tqdm(smplObjects):
         try:
-            fbx_path = cur_file_path + fbx_source_path
+            fbx_path = os.path.join(cur_file_path,fbx_source_path)
             fbxReadWrite = FbxReadWrite(fbx_path)
             fbxReadWrite.addAnimation(pkl_name, smpl_params)
             fbxReadWrite.writeFbx(output_base, pkl_name)

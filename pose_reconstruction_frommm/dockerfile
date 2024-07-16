@@ -1,0 +1,24 @@
+# Use the official PyTorch image provided by PyTorch
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-devel
+
+# Set the working directory to /app, the current directory in the container will be set to /app
+WORKDIR /app
+
+# Install the git command line tool to clone the required repositories
+RUN apt-get update && apt-get install -y git
+# Install the remaining pip dependencies
+# Note: We no longer need conda to create the environment because the base image already has Python and the required libraries configured
+RUN pip install matplotlib opencv-python scikit-learn trimesh Pillow pyrender pyglet==1.5.15 tensorboard addict && \
+    # Install the configer package, which is a Python library for simplifying the processing of configuration files
+    pip install git+https://github.com/nghorbani/configer.git && \
+    # Install torchgeometry and smplx packages
+    pip install torchgeometry==0.1.2 smplx==0.1.28
+
+# Optional: Set the default Python environment variable to ensure the use of the Python version included in the base image
+ENV PATH /usr/local/bin:$PATH
+
+# Optional: Define the command to be executed when the container starts, here Python is used as the default command
+CMD ["python"]
+
+# Optional: Mark the version of the image
+LABEL version="1.0"
