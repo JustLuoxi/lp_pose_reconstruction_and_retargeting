@@ -71,11 +71,11 @@ given that the multi-modal data streams collected in our dataset, including the 
 
 2. Prepare the environment
    ```shell
-   conda create -n pose python=3.7
-   conda activate pose
-   conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=10.1 -c pytorch
+   conda create -n h2tc_pose python=3.8
+   conda activate h2tc_pose
+   conda install pytorch==1.13.1 torchvision==0.14.1 cudatoolkit=11.6 -c pytorch -c nvidia
    pip install matplotlib opencv-python scikit-learn  trimesh  \
-   Pillow  pyrender pyglet==1.5.15  tensorboard  \
+   Pillow  pyrender pyglet==1.5.15  tensorboard  addict\
    git+https://github.com/nghorbani/configer \
    torchgeometry==0.1.2 smplx==0.1.28
    ```

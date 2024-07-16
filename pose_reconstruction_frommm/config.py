@@ -36,7 +36,7 @@ def parse_args(argv):
     # smpl model path
     parser.add_argument('--smplh', type=str, default='./body_models/smplh/neutral/model.npz', help='Path to SMPLH model to use for optimization. Currently only SMPL+H is supported.')
     parser.add_argument('--gt-body-type', type=str, default='smplh', choices=['smplh'], help='Which body model to load in for GT data')
-    parser.add_argument('--vposer', type=str, default='./checkpoints/vposer_v1_0', help='Path to VPoser checkpoint.')
+    parser.add_argument('--vposer', type=str, default='/checkpoints/vposer_v1_0', help='Path to VPoser checkpoint.')
 
     # optimization options
     parser.add_argument('--lr', type=float, default=1.0, help='step size during optimization')
