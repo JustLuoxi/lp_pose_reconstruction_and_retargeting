@@ -188,21 +188,21 @@ To animate the human model and retarget the motion to robots, we first transfer 
       <small>a. Install [Python FBX](https://download.autodesk.com/us/fbx/20112/fbx_sdk_help/index.html?url=WS1a9193826455f5ff453265c9125faa23bbb5fe8.htm,topicNumber=d0e8312).  
       b. Run the following commands:</small>
       
-      ```shell
-      cd smplh_to_fbx_animation
-      pip install -r requirements.txt
-      ```
+   ```shell
+   cd smplh_to_fbx_animation
+   pip install -r requirements.txt
+   ```
    - Option 2: (docker image)
-      ```shell
-      docker pull justluoxi/h2tc_env_image:latest
-      docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
-      ```
+   ```shell
+   docker pull justluoxi/h2tc_env_image:latest
+   docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
+   ```
       <small>This environment shares the same docker image with the last [h2tc_pose environment](#multi-modal-based-human-pose-optimization). 
       If you have built the docker container before, you can ignore the pull-image step and run directly:   </small>
-      ```shell
-      docker exec -it h2tc bash
-      conda activate h2tc_tofbx
-      ```
+   ```shell
+   docker exec -it h2tc bash
+   conda activate h2tc_tofbx
+   ```
 
 
 2. Prepare SMPLH fbx model 
@@ -239,9 +239,14 @@ We utilize Unity 3D (2022.3.17) to demonstrate the retargeting process. Please r
 3. Animation: Follow the instructions provided in the tutorial video. Unity 3D employs the [Linear Blend Skinning (LBS)](http://graphics.cs.cmu.edu/courses/15-466-f17/notes/skinning.html) algorithm for animation.
 
 
-The video below demonstrates a collection of retargeting results. It shows our pose reconstruction results and retargeting results using jvrc, atlas, icub and pepper robots. You can find the rigged models of these 4 robots in folder `assets\robot_models` (T-pose, .fbx format).   
+The video below demonstrates a collection of retargeting results. It shows our pose reconstruction results and retargeting results using jvrc, atlas, icub and pepper robots. 
 
 
 <div  align='center' style="display: flex; justify-content: center;">
 <img src="./assets/retarget.gif" width = "600" >
 </div  align='center' >
+
+### Rigged robot models
+We provide the rigged jvrc, atlas, icub and pepper robots. You can find them in folder `assets\robot_models` (T-pose, .fbx format).   
+
+![rigged_robots](assets/rigged_robots.png)
