@@ -112,10 +112,10 @@ given that the multi-modal data streams collected in our dataset, including the 
                └── model.npz
     ├── checkpoints
             └── vposer_v1_0
-    ├── motion_modeling
     ├── pose_fitting
     ├── utils
     ├── config.py
+    ├── dockerfile
     ├── fit_h2tc_mm.cfg           # config file
     ├── h2tc_fit_dataset_mm.py
     ├── motion_optimizer.py
@@ -217,8 +217,7 @@ To animate the human model and retarget the motion to robots, we first transfer 
     ├──Convert.py   
     ├──FbxReadWriter.py
     ├──SMPLXObject.py
-    ├──SmplObject.py
-    └──PathFilter.py
+    └──requirements.txt
     ```
 4. Run the following command to start converting.
    ```shell
