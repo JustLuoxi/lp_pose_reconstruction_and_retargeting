@@ -84,10 +84,11 @@ given that the multi-modal data streams collected in our dataset, including the 
    - Option 2: (docker image)
    ```shell
    docker pull justluoxi/h2tc_env_image:latest
-   docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
+   docker run --gpus all --name h2tc -v ${HOSTPATH}:${CONTAINERPATH} -idt justluoxi/h2tc_env_image:latest 
    docker exec -it h2tc bash
    conda activate h2tc_pose
    ```
+   <small>❗Note: mount your codes and data in host machine `${HOSTPATH}` to your container `${CONTAINERPATH}` and run your container with `--gpus all`.  </small>
 3. Prepare SMPL+H model
 (<small>Note: In the last [coarse human pose estimation](#coarse-human-pose-estimation) stage, the mmhuman3d estimates human body poses only. In this stage, we want to recover the body+hands poses, so we use the smplh model.</small>)
    1. Create an account on the [project page](https://mano.is.tue.mpg.de/)
@@ -195,7 +196,7 @@ To animate the human model and retarget the motion to robots, we first transfer 
    - Option 2: (docker image)
    ```shell
    docker pull justluoxi/h2tc_env_image:latest
-   docker run --gpus all --name h2tc -idt justluoxi/h2tc_env_image:latest 
+   docker run --gpus all --name h2tc -v ${HOSTPATH}:${CONTAINERPATH} -idt justluoxi/h2tc_env_image:latest 
    ```
       <small>This environment shares the same docker image with the last [h2tc_pose environment](#multi-modal-based-human-pose-optimization). 
       If you have built the docker container before, you can ignore the pull-image step and run directly:   </small>
